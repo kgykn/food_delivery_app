@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/HomePage/products.dart';
 import 'package:fooddeliveryapp/HomePage/products.dart';
+import 'package:fooddeliveryapp/Models/user_profile.dart';
 
 class HomePage extends StatefulWidget{
   @override
@@ -16,7 +17,8 @@ class _HomePageState extends State<HomePage>
         backgroundColor: Colors.deepOrangeAccent,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.shopping_basket, color: Colors.white,), onPressed: null), // cart button
-          IconButton(icon: Icon(Icons.person, color: Colors.white,), onPressed: null) // user profile button
+          IconButton(icon: Icon(Icons.person, color: Colors.white,), 
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfile()))), // user profile button
         ],
       ),
 

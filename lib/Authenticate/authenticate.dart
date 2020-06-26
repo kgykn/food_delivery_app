@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fooddeliveryapp/LogIn/sign_in.dart';
+import 'package:fooddeliveryapp/Authenticate/sign_in.dart';
 
 class Authenticate extends StatefulWidget {
   _AuthenticateState createState() => _AuthenticateState();
