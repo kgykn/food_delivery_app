@@ -64,7 +64,12 @@ class ProductGrid extends StatelessWidget {
             tag: prod_name,
             child: Material(
                 child: InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetails())),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetails(
+                      pd_name: prod_name,
+                      pd_price: prod_price,
+                      pd_description: prod_description,
+                      pd_picture_location: prod_picture_location,
+                    ))),
                     child: GridTile(
                       footer: Container(
                         height: 55.0,
