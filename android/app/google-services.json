@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "579393100789",
+    "firebase_url": "https://food-e-commerce-app.firebaseio.com",
+    "project_id": "food-e-commerce-app",
+    "storage_bucket": "food-e-commerce-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579393100789:android:85cc3953689248e0761ebc",
+        "android_client_info": {
+          "package_name": "com.example.fooddeliveryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579393100789-lar08uqmhkop3ed2ljmuls3scl65ti9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuIjA8IkXTUpjiE3NZ17dtUrOJikapWrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579393100789-lar08uqmhkop3ed2ljmuls3scl65ti9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
