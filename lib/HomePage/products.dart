@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/HomePage/product_details.dart';
-class Product extends StatefulWidget{
+
+class Product extends StatefulWidget {
   _ProductState createState() => _ProductState();
 }
 
@@ -30,8 +31,8 @@ class _ProductState extends State<Product> {
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: product_list.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2),
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (BuildContext context, int index) {
         return ProductGrid(
           prod_name: product_list[index]["name"],
@@ -50,12 +51,11 @@ class ProductGrid extends StatelessWidget {
   final prod_price;
   final prod_description;
 
-  ProductGrid({
-    this.prod_name,
-    this.prod_picture_location,
-    this.prod_price,
-    this.prod_description
-  });
+  ProductGrid(
+      {this.prod_name,
+      this.prod_picture_location,
+      this.prod_price,
+      this.prod_description});
 
   @override
   Widget build(BuildContext context) {
@@ -64,33 +64,32 @@ class ProductGrid extends StatelessWidget {
             tag: prod_name,
             child: Material(
                 child: InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetails(
-                      pd_name: prod_name,
-                      pd_price: prod_price,
-                      pd_description: prod_description,
-                      pd_picture_location: prod_picture_location,
-                    ))),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ProductDetails(
+                              pd_name: prod_name,
+                              pd_price: prod_price,
+                              pd_description: prod_description,
+                              pd_picture_location: prod_picture_location,
+                            ))),
                     child: GridTile(
                       footer: Container(
-                        height: 55.0,
+                        height: 60.0,
                         color: Colors.white70,
                         child: ListTile(
-                            title: Text(prod_name, style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12.0
+                            title: Text(
+                              prod_name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 12.0),
                             ),
-                            ),
-                            subtitle: Text("$prod_price", style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            )
-                        ),
+                            subtitle: Text(
+                              "$prod_price",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
                       ),
-                      child: Image.asset(prod_picture_location,
-                          fit: BoxFit.cover),
-                    )
-                )
-            )
-        ));
+                      child:
+                          Image.asset(prod_picture_location, fit: BoxFit.cover),
+                    )))));
   }
 }

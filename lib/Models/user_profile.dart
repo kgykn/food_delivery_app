@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Authenticate/auth.dart';
+import 'package:fooddeliveryapp/Database.dart';
 
 class UserProfile extends StatefulWidget {
   _UserProfileState createState() => _UserProfileState();

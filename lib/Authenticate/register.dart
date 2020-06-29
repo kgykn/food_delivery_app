@@ -16,6 +16,9 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController repeatPasswordController = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+    final RegExp nameRegExp = RegExp('[a-zA-Z]');
 
     String error = '';
     final AuthService _auth = AuthService();
@@ -31,8 +34,11 @@ class _RegisterState extends State<Register> {
                 title: Text("Register"),
                 actions: <Widget>[
                   FlatButton.icon(
-                      icon: Icon(Icons.person),
-                      label: Text('Log in'),
+                      icon: Icon(Icons.person, color: Colors.white),
+                      label: Text(
+                        'Log in',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       onPressed: () => widget.toggleView())
                 ]),
             body: Container(
@@ -42,6 +48,15 @@ class _RegisterState extends State<Register> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(height: 20.0),
+                        TextFormField(
+                            controller: nameController,
+                            decoration: InputDecoration(hintText: "Your name"),
+                            validator: (value) => value.isEmpty
+                                ? 'Enter your name'
+                                : nameRegExp.hasMatch(value)
+                                    ? null
+                                    : 'Enter a valid name'),
+                        SizedBox(height: 10.0),
                         TextFormField(
                             controller: emailController,
                             decoration: InputDecoration(hintText: "Email"),
@@ -56,6 +71,18 @@ class _RegisterState extends State<Register> {
                           validator: (value) => value.length < 6
                               ? 'Password must be 6+ characters long'
                               : null,
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          controller: repeatPasswordController,
+                          obscureText: true,
+                          decoration:
+                              InputDecoration(hintText: "Repeat password"),
+                          validator: (value) => value.length < 6
+                              ? 'Invalid password'
+                              : value == passwordController.text
+                                  ? null
+                                  : 'Password does not match',
                         ),
                         SizedBox(height: 20.0),
                         RaisedButton(
