@@ -13,8 +13,12 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     var product = Product();
     return Scaffold(
+=======
+    return Scaffold (
+>>>>>>> parent of d3b2d0d... minor changes
 =======
     return Scaffold (
 >>>>>>> parent of d3b2d0d... minor changes
