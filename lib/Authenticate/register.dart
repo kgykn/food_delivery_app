@@ -17,8 +17,6 @@ class _RegisterState extends State<Register> {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController repeatPasswordController = TextEditingController();
-    TextEditingController nameController = TextEditingController();
-    final RegExp nameRegExp = RegExp('[a-zA-Z]');
 
     String error = '';
     final AuthService _auth = AuthService();
@@ -48,15 +46,6 @@ class _RegisterState extends State<Register> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(height: 20.0),
-                        TextFormField(
-                            controller: nameController,
-                            decoration: InputDecoration(hintText: "Your name"),
-                            validator: (value) => value.isEmpty
-                                ? 'Enter your name'
-                                : nameRegExp.hasMatch(value)
-                                    ? null
-                                    : 'Enter a valid name'),
-                        SizedBox(height: 10.0),
                         TextFormField(
                             controller: emailController,
                             decoration: InputDecoration(hintText: "Email"),

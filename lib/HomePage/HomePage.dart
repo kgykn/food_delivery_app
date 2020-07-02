@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var product = Product();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrangeAccent,
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                   ))),
           Container(
             height: 400.0,
-            child: Product(),
+            child: product,
           )
         ],
       ),
