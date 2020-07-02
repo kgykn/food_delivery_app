@@ -30,9 +30,8 @@ class _SignInState extends State<SignIn> {
                 title: Text("Log in"),
                 actions: <Widget>[
                   FlatButton.icon(
-                      icon: Icon(Icons.person, color: Colors.white),
-                      label: Text('Register',
-                          style: TextStyle(color: Colors.white)),
+                      icon: Icon(Icons.person),
+                      label: Text('Register'),
                       onPressed: () => widget.toggleView())
                 ]),
             body: Container(

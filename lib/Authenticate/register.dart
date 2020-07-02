@@ -16,7 +16,10 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+<<<<<<< HEAD
     TextEditingController repeatPasswordController = TextEditingController();
+=======
+>>>>>>> parent of 9546992... minor changes
 
     String error = '';
     final AuthService _auth = AuthService();
@@ -32,11 +35,8 @@ class _RegisterState extends State<Register> {
                 title: Text("Register"),
                 actions: <Widget>[
                   FlatButton.icon(
-                      icon: Icon(Icons.person, color: Colors.white),
-                      label: Text(
-                        'Log in',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      icon: Icon(Icons.person),
+                      label: Text('Log in'),
                       onPressed: () => widget.toggleView())
                 ]),
             body: Container(
@@ -60,18 +60,6 @@ class _RegisterState extends State<Register> {
                           validator: (value) => value.length < 6
                               ? 'Password must be 6+ characters long'
                               : null,
-                        ),
-                        SizedBox(height: 10.0),
-                        TextFormField(
-                          controller: repeatPasswordController,
-                          obscureText: true,
-                          decoration:
-                              InputDecoration(hintText: "Repeat password"),
-                          validator: (value) => value.length < 6
-                              ? 'Invalid password'
-                              : value == passwordController.text
-                                  ? null
-                                  : 'Password does not match',
                         ),
                         SizedBox(height: 20.0),
                         RaisedButton(
