@@ -16,10 +16,6 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-<<<<<<< HEAD
-    TextEditingController repeatPasswordController = TextEditingController();
-=======
->>>>>>> parent of 9546992... minor changes
 
     String error = '';
     final AuthService _auth = AuthService();
