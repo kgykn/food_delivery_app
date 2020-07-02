@@ -16,6 +16,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController repeatPasswordController = TextEditingController();
 
     String error = '';
     final AuthService _auth = AuthService();
@@ -55,6 +56,16 @@ class _RegisterState extends State<Register> {
                           decoration: InputDecoration(hintText: "Password"),
                           validator: (value) => value.length < 6
                               ? 'Password must be 6+ characters long'
+                              : null,
+                        ),
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          controller: repeatPasswordController,
+                          obscureText: true,
+                          decoration:
+                              InputDecoration(hintText: "Repeat password"),
+                          validator: (value) => value != passwordController.text
+                              ? 'Password does not match'
                               : null,
                         ),
                         SizedBox(height: 20.0),
