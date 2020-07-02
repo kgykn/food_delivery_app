@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fooddeliveryapp/Database/UserDatabase.dart';
+import 'package:fooddeliveryapp/Database.dart';
 import 'package:fooddeliveryapp/Models/user.dart';
-import 'package:fooddeliveryapp/Authenticate/register.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -49,8 +48,8 @@ class AuthService {
       FirebaseUser user = result.user;
 
       // Add new user to database
-      await UserDatabaseService(uid: user.uid).updateUserData(
-          'new user', DateTime(1970, 01, 01), user.email, '0000000000');
+      await DatabaseService(uid: user.uid)
+          .updateUserData('new user', '0000000000');
       return _userfromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
