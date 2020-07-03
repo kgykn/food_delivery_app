@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:fooddeliveryapp/Database/categories.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
 import 'package:fooddeliveryapp/UI/loading.dart';
@@ -19,6 +20,7 @@ class _AddProductState extends State<AddProduct> {
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  bool _isFeatured = true;
 
   File productImage;
   ProductDatabaseService productData = ProductDatabaseService();
@@ -40,48 +42,89 @@ class _AddProductState extends State<AddProduct> {
             key: _formKey,
             child: ListView(
               children: <Widget>[
-                OutlineButton(
-                    borderSide: BorderSide(
-                        color: Colors.grey.withOpacity(0.8), width: 2.0),
-                    onPressed: () {
-                      _selectImage(
-                          // ignore: deprecated_member_use
-                          ImagePicker.pickImage(source: ImageSource.gallery));
-                    },
-                    child: productImage == null
-                        ? Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 40, 15, 40),
-                            child: Icon(Icons.add, color: Colors.grey),
-                          )
-                        : Image.file(
-                            productImage,
-                            fit: BoxFit.fill,
-                          )),
-                SizedBox(height: 10.0),
-                TextFormField(
-                  maxLength: 30,
-                  maxLines: 1,
-                  controller: nameController,
-                  decoration: InputDecoration(hintText: "Product name"),
-                  validator: (value) =>
-                      !regExp.hasMatch(value) ? 'Name invalid!' : null,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: OutlineButton(
+                      borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.8), width: 2.0),
+                      onPressed: () {
+                        _selectImage(
+                            // ignore: deprecated_member_use
+                            ImagePicker.pickImage(source: ImageSource.gallery));
+                      },
+                      child: productImage == null
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(15, 40, 15, 40),
+                              child: Icon(Icons.add, color: Colors.grey),
+                            )
+                          : Image.file(
+                              productImage,
+                              fit: BoxFit.fill,
+                            )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    maxLength: 30,
+                    maxLines: 1,
+                    controller: nameController,
+                    decoration: InputDecoration(hintText: "Product name"),
+                    validator: (value) =>
+                        !regExp.hasMatch(value) ? 'Name invalid!' : null,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    maxLength: 200,
+                    maxLines: 5,
+                    controller: descriptionController,
+                    decoration: InputDecoration(hintText: "Description"),
+                    validator: (value) =>
+                        value.isEmpty ? 'Description can\'t be empty!' : null,
+                  ),
                 ),
                 SizedBox(height: 10.0),
-                TextFormField(
-                  maxLength: 200,
-                  maxLines: 5,
-                  controller: descriptionController,
-                  decoration: InputDecoration(hintText: "Description"),
-                  validator: (value) =>
-                      value.isEmpty ? 'Description can\'t be empty!' : null,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: priceController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(hintText: "Price"),
+                    validator: (value) =>
+                        value.isEmpty ? 'Price can\'t be empty!' : null,
+                  ),
                 ),
-                SizedBox(height: 10.0),
-                TextFormField(
-                  controller: priceController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: "Price"),
-                  validator: (value) =>
-                      value.isEmpty ? 'Price can\'t be empty!' : null,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(children: <Widget>[
+                    Conditional.single(
+                        context: context,
+                        conditionBuilder: (context) => _isFeatured,
+                        widgetBuilder: (context) => InkWell(
+                              child: IconButton(
+                                  icon: Icon(Icons.add_circle,
+                                      size: 30.0,
+                                      color: Colors.deepOrangeAccent),
+                                  onPressed: () =>
+                                      setState(() => _isFeatured = false)),
+                            ),
+                        fallbackBuilder: (context) => InkWell(
+                              child: IconButton(
+                                  icon: Icon(Icons.add_circle_outline,
+                                      size: 30.0,
+                                      color: Colors.deepOrangeAccent),
+                                  onPressed: () =>
+                                      setState(() => _isFeatured = true)),
+                            )),
+                    Text(
+                      'This product is featured',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )
+                  ]),
                 ),
                 FlatButton(
                     color: Colors.deepOrangeAccent,
@@ -110,11 +153,13 @@ class _AddProductState extends State<AddProduct> {
         final FirebaseStorage storage = FirebaseStorage.instance;
         final String _imageName =
             "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-        StorageUploadTask task =
-            storage.ref().child("products/$_imageName").putFile(productImage);
-
-        task.onComplete.then((snapshot) async {
-          imageUrl = await snapshot.ref.getDownloadURL();
+        storage
+            .ref()
+            .child(_imageName)
+            .putFile(productImage)
+            .onComplete
+            .then((snapshot) async {
+          String imageUrl = await snapshot.ref.getDownloadURL();
         });
 
         productData.uploadProduct({
@@ -122,6 +167,7 @@ class _AddProductState extends State<AddProduct> {
           "description": descriptionController.text,
           "price": priceController.text,
           "image": imageUrl,
+          "isFeatured": _isFeatured
         });
         _formKey.currentState.reset();
         setState(() => _isLoading = false);
