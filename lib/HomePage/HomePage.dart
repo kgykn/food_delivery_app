@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fooddeliveryapp/HomePage/products.dart';
+import 'package:fooddeliveryapp/Admin/admin.dart';
 import 'package:fooddeliveryapp/HomePage/products.dart';
 import 'package:fooddeliveryapp/Models/user_profile.dart';
 
@@ -15,6 +15,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.deepOrangeAccent,
         actions: <Widget>[
+          FlatButton.icon(
+              onPressed: null,
+              icon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              label: Text('Admin', style: TextStyle(color: Colors.white)),
+              onLongPress: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AdminPage()))),
           IconButton(
               icon: Icon(
                 Icons.shopping_basket,
