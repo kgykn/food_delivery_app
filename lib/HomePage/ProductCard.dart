@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Models/products.dart';
-import 'package:fooddeliveryapp/HomePage/product_details.dart';
+import 'package:fooddeliveryapp/HomePage/ProductDetails.dart';
 import 'package:fooddeliveryapp/UI/loading.dart';
 
 class ProductCard extends StatelessWidget {
@@ -24,19 +24,19 @@ class ProductCard extends StatelessWidget {
                     child: GridTile(
                       footer: Container(
                         height: 55.0,
-                        color: Colors.white60,
+                        color: Colors.white70,
                         child: ListTile(
                             title: Text(
                               product.name,
                               style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 12.0),
+                                  fontWeight: FontWeight.w700, fontSize: 15.0),
                             ),
                             subtitle: Text(
                               product.price.toString(),
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.deepOrangeAccent,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.deepOrangeAccent,
+                                  fontSize: 13.0),
                             )),
                       ),
                       child: product.imageUrl != null

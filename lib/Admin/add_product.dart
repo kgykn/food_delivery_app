@@ -83,7 +83,6 @@ class _AddProductState extends State<AddProduct> {
                         value.isEmpty ? 'Description can\'t be empty!' : null,
                   ),
                 ),
-                SizedBox(height: 10.0),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(

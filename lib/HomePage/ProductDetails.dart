@@ -30,7 +30,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   title: Align(
                       alignment: Alignment.topRight,
                       child: Text(
-                        "${widget.pdPrice}",
+                        "${widget.pdPrice}VND",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.deepOrangeAccent,
