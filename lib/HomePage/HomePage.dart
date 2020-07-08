@@ -45,18 +45,24 @@ class _HomePageState extends State<HomePage> {
                   builder: (context) => UserProfile()))), // user profile button
         ],
       ),
-      body: Container(
-          height: 400,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                  child: StreamProvider<List<Product>>.value(
-                      initialData: List(),
-                      value: ProductDatabaseService().products,
-                      child: ProductList()))
-            ],
-          )),
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Menu',
+                style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepOrangeAccent)),
+          ),
+          Container(
+              height: 400.0,
+              child: StreamProvider<List<Product>>.value(
+                  initialData: List(),
+                  value: ProductDatabaseService().products,
+                  child: ProductList()))
+        ],
+      ),
     );
   }
 }

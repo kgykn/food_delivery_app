@@ -35,6 +35,7 @@ class ProductCard extends StatelessWidget {
                               product.price.toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
+                                color: Colors.deepOrangeAccent,
                               ),
                             )),
                       ),
