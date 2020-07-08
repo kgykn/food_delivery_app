@@ -144,29 +144,26 @@ class _AddProductState extends State<AddProduct> {
     setState(() => productImage = tempImg);
   }
 
-  void ValidateAndUpload() {
+  void ValidateAndUpload() async {
     if (_formKey.currentState.validate()) {
       setState(() => _isLoading = true);
       if (productImage != null) {
-        String imageUrl;
+        var imageUrl;
 
         final FirebaseStorage storage = FirebaseStorage.instance;
         final String _imageName =
             "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-        storage
-            .ref()
-            .child(_imageName)
-            .putFile(productImage)
-            .onComplete
-            .then((snapshot) async {
-          String imageUrl = await snapshot.ref.getDownloadURL();
-        });
+        StorageUploadTask uploadTask =
+            storage.ref().child(_imageName).putFile(productImage);
+
+        imageUrl = (await (await uploadTask.onComplete).ref.getDownloadURL())
+            .toString();
 
         productData.uploadProduct({
           "name": nameController.text,
           "description": descriptionController.text,
           "price": priceController.text,
-          "image": imageUrl,
+          "imageUrl": imageUrl,
           "isFeatured": _isFeatured
         });
         _formKey.currentState.reset();
