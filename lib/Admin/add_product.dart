@@ -159,7 +159,7 @@ class _AddProductState extends State<AddProduct> {
         imageUrl = (await (await uploadTask.onComplete).ref.getDownloadURL())
             .toString();
 
-        productData.uploadProduct({
+        productData.updateProductData({
           "name": nameController.text,
           "description": descriptionController.text,
           "price": priceController.text,

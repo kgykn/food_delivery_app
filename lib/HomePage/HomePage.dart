@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Admin/admin.dart';
-import 'package:fooddeliveryapp/HomePage/products.dart';
+import 'package:fooddeliveryapp/Authenticate/auth.dart';
+import 'package:fooddeliveryapp/Database/productDatabase.dart';
+import 'package:fooddeliveryapp/HomePage/ProductList.dart';
+import 'package:fooddeliveryapp/Models/products.dart';
 import 'package:fooddeliveryapp/Models/user_profile.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AuthService authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,22 +45,18 @@ class _HomePageState extends State<HomePage> {
                   builder: (context) => UserProfile()))), // user profile button
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Menu",
-                  style: TextStyle(
-                    color: Colors.deepOrangeAccent,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ))),
-          Container(
-            height: 400.0,
-            child: Product(),
-          )
-        ],
-      ),
+      body: Container(
+          height: 400,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              Container(
+                  child: StreamProvider<List<Product>>.value(
+                      initialData: List(),
+                      value: ProductDatabaseService().products,
+                      child: ProductList()))
+            ],
+          )),
     );
   }
 }
