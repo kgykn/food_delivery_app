@@ -26,18 +26,12 @@ class ProductCard extends StatelessWidget {
                         height: 55.0,
                         color: Colors.white70,
                         child: ListTile(
-                            title: Text(
-                              product.name,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 15.0),
-                            ),
-                            subtitle: Text(
-                              product.price.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepOrangeAccent,
-                                  fontSize: 13.0),
-                            )),
+                          title: Text(
+                            product.name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 15.0),
+                          ),
+                        ),
                       ),
                       child: product.imageUrl != null
                           ? Image.network(product.imageUrl,

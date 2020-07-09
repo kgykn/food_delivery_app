@@ -36,4 +36,20 @@ class ProductDatabaseService {
             description: doc.data['description']))
         .toList());
   }
+
+  Stream<List<Product>> get featuredProducts {
+    Stream<QuerySnapshot> stream = Firestore.instance
+        .collection("products")
+        .where("isFeatured", isEqualTo: true)
+        .snapshots();
+
+    return stream.map((qShot) => qShot.documents
+        .map((doc) => Product(
+            name: doc.data['name'],
+            imageUrl: doc.data['imageUrl'],
+            price: doc.data['price'],
+            isFeatured: doc.data['isFeatured'],
+            description: doc.data['description']))
+        .toList());
+  }
 }

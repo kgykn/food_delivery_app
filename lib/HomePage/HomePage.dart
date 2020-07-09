@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Menu',
+            child: Text('Featured products',
                 style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               height: 400.0,
               child: StreamProvider<List<Product>>.value(
                   initialData: List(),
-                  value: ProductDatabaseService().products,
+                  value: ProductDatabaseService().featuredProducts,
                   child: ProductList()))
         ],
       ),
