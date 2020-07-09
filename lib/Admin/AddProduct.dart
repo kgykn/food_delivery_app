@@ -2,10 +2,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
+import 'package:fooddeliveryapp/Database/categoryDatabase.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
+import 'package:fooddeliveryapp/Models/category.dart';
 import 'package:fooddeliveryapp/UI/loading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:provider/provider.dart';
 
 class AddProduct extends StatefulWidget {
   @override
@@ -20,13 +23,13 @@ class _AddProductState extends State<AddProduct> {
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   bool _isFeatured = true;
-
-  File productImage;
-  ProductDatabaseService productData = ProductDatabaseService();
   RegExp regExp = RegExp(r'^[a-zA-Z ]*$');
 
-  @override
-  void initState() {}
+  File productImage;
+  CategoryDatabaseService categoryService = CategoryDatabaseService();
+  List<String> category = <String>[];
+  var selectedCategory;
+  ProductDatabaseService productData = ProductDatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +102,50 @@ class _AddProductState extends State<AddProduct> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: StreamBuilder<QuerySnapshot>(
+                          stream: Firestore.instance
+                              .collection("categories")
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData)
+                              const Text("Loading.....");
+                            else {
+                              List<DropdownMenuItem> categoryItems = [];
+                              for (int i = 0;
+                                  i < snapshot.data.documents.length;
+                                  i++) {
+                                DocumentSnapshot snap =
+                                    snapshot.data.documents[i];
+                                categoryItems.add(
+                                  DropdownMenuItem(
+                                    child: Text(
+                                      snap.data['name'],
+                                    ),
+                                    value: "${snap.data['name']}",
+                                  ),
+                                );
+                              }
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  DropdownButton(
+                                    items: categoryItems,
+                                    onChanged: (item) {
+                                      setState(() {
+                                        selectedCategory = item;
+                                      });
+                                    },
+                                    value: selectedCategory,
+                                    isExpanded: false,
+                                    hint: new Text("Choose Category"),
+                                  ),
+                                ],
+                              );
+                            }
+                          }),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(children: <Widget>[
                         Conditional.single(
                             context: context,
@@ -167,11 +214,11 @@ class _AddProductState extends State<AddProduct> {
         productData.updateProductData({
           "name": nameController.text,
           "description": descriptionController.text,
+          "category": selectedCategory,
           "price": priceController.text,
           "imageUrl": imageUrl,
           "isFeatured": _isFeatured
         });
-        _formKey.currentState.reset();
         setState(() => _isLoading = false);
         Navigator.pop(context);
       } else {

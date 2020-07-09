@@ -21,6 +21,7 @@ class ProductDatabaseService {
             name: doc.data['name'],
             imageUrl: doc.data['imageUrl'],
             price: doc.data['price'],
+            category: doc.data['category'],
             isFeatured: doc.data['isFeatured'],
             description: doc.data['description']))
         .toList());
@@ -37,6 +38,24 @@ class ProductDatabaseService {
             name: doc.data['name'],
             imageUrl: doc.data['imageUrl'],
             price: doc.data['price'],
+            category: doc.data['category'],
+            isFeatured: doc.data['isFeatured'],
+            description: doc.data['description']))
+        .toList());
+  }
+
+  Stream<List<Product>> viewProductByCategory(String category) {
+    Stream<QuerySnapshot> stream = Firestore.instance
+        .collection("products")
+        .where("category", isEqualTo: category)
+        .snapshots();
+
+    return stream.map((qShot) => qShot.documents
+        .map((doc) => Product(
+            name: doc.data['name'],
+            imageUrl: doc.data['imageUrl'],
+            price: doc.data['price'],
+            category: doc.data['category'],
             isFeatured: doc.data['isFeatured'],
             description: doc.data['description']))
         .toList());

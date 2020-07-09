@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Admin/admin.dart';
 import 'package:fooddeliveryapp/Authenticate/auth.dart';
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final AuthService authService = AuthService();
+  String selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +51,52 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Menu',
-                style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.deepOrangeAccent)),
+            child: StreamBuilder<QuerySnapshot>(
+                stream: Firestore.instance.collection("categories").snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    const Text("Loading.....");
+                  else {
+                    List<DropdownMenuItem> categoryItems = [];
+                    for (int i = 0; i < snapshot.data.documents.length; i++) {
+                      DocumentSnapshot snap = snapshot.data.documents[i];
+                      categoryItems.add(
+                        DropdownMenuItem(
+                          child: Text(
+                            snap.data['name'],
+                          ),
+                          value: "${snap.data['name']}",
+                        ),
+                      );
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Menu',
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.deepOrangeAccent)),
+                        ),
+                        SizedBox(width: 150.0),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButton(
+                              items: categoryItems,
+                              onChanged: (item) {
+                                setState(() {
+                                  selectedCategory = item;
+                                });
+                              },
+                              value: selectedCategory,
+                              isExpanded: false),
+                        ),
+                      ],
+                    );
+                  }
+                }),
           ),
           Container(
               height: 400.0,
