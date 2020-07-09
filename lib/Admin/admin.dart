@@ -19,23 +19,29 @@ class _AdminPageState extends State<AdminPage> {
             )),
         body: ListView(
           children: <Widget>[
-            MaterialButton(
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => AddProduct())),
-              child: Text("Add product",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              color: Colors.deepOrangeAccent,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MaterialButton(
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AddProduct())),
+                child: Text("Add product",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                color: Colors.deepOrangeAccent,
+              ),
             ),
-            MaterialButton(
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => AddCategory())),
-              child: Text("Add category",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              color: Colors.deepOrangeAccent,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MaterialButton(
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AddCategory())),
+                child: Text("Add category",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                color: Colors.deepOrangeAccent,
+              ),
             )
           ],
         ));

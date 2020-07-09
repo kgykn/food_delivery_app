@@ -4,7 +4,7 @@ import 'package:fooddeliveryapp/Authenticate/auth.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
 import 'package:fooddeliveryapp/Components/Products/ProductList.dart';
 import 'package:fooddeliveryapp/Models/product.dart';
-import 'package:fooddeliveryapp/UserProfile/user_profile.dart';
+import 'package:fooddeliveryapp/UserProfile/UserProfile.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

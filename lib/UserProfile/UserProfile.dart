@@ -16,16 +16,19 @@ class _UserProfileState extends State<UserProfile> {
         ),
         body: ListView(
           children: <Widget>[
-            MaterialButton(
-              onPressed: () async {
-                await _auth.signOut();
-                Navigator.pop(context);
-              },
-              child: Text("Sign out",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-              color: Colors.deepOrangeAccent,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MaterialButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                  Navigator.pop(context);
+                },
+                child: Text("Sign out",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                color: Colors.deepOrangeAccent,
+              ),
             )
           ],
         ));
