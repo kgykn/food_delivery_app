@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooddeliveryapp/Admin/AddCategory.dart';
 import 'package:fooddeliveryapp/Admin/AddProduct.dart';
 
 class AdminPage extends StatefulWidget {
@@ -22,6 +23,15 @@ class _AdminPageState extends State<AdminPage> {
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => AddProduct())),
               child: Text("Add product",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+              color: Colors.deepOrangeAccent,
+            ),
+            MaterialButton(
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AddCategory())),
+              child: Text("Add category",
                   style: TextStyle(
                     color: Colors.white,
                   )),

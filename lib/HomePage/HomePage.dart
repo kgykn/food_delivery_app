@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Admin/admin.dart';
 import 'package:fooddeliveryapp/Authenticate/auth.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
-import 'package:fooddeliveryapp/Products/ProductList.dart';
-import 'package:fooddeliveryapp/Models/products.dart';
+import 'package:fooddeliveryapp/Components/Products/ProductList.dart';
+import 'package:fooddeliveryapp/Models/product.dart';
 import 'package:fooddeliveryapp/UserProfile/user_profile.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Featured products',
+            child: Text('Menu',
                 style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,

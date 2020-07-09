@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fooddeliveryapp/Models/products.dart';
+import 'package:fooddeliveryapp/Models/product.dart';
 
 class ProductDatabaseService {
   final String productId;
