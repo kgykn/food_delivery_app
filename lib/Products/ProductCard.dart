@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Models/products.dart';
-import 'package:fooddeliveryapp/HomePage/ProductDetails.dart';
+import 'package:fooddeliveryapp/Products/ProductDetails.dart';
 import 'package:fooddeliveryapp/UI/loading.dart';
 
 class ProductCard extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fooddeliveryapp/Admin/add_product.dart';
+import 'package:fooddeliveryapp/Admin/AddProduct.dart';
 
 class AdminPage extends StatefulWidget {
   @override

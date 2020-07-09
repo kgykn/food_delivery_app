@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fooddeliveryapp/Models/products.dart';
-import 'package:fooddeliveryapp/HomePage/ProductCard.dart';
+import 'package:fooddeliveryapp/Products/ProductCard.dart';
 
 class ProductList extends StatefulWidget {
   @override

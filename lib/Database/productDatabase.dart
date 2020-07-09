@@ -8,17 +8,6 @@ class ProductDatabaseService {
   final CollectionReference productCollection =
       Firestore.instance.collection('products');
 
-  List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      return Product(
-          name: doc.data["name"],
-          imageUrl: doc.data["imageUrl"],
-          description: doc.data["description"],
-          isFeatured: doc.data["isFeatured"],
-          price: doc.data["price"]);
-    }).toList();
-  }
-
   Future<void> updateProductData(Map<String, dynamic> data) async {
     return await productCollection.document(productId).setData(data);
   }

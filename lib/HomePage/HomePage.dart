@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fooddeliveryapp/Admin/admin.dart';
 import 'package:fooddeliveryapp/Authenticate/auth.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
-import 'package:fooddeliveryapp/HomePage/ProductList.dart';
+import 'package:fooddeliveryapp/Products/ProductList.dart';
 import 'package:fooddeliveryapp/Models/products.dart';
-import 'package:fooddeliveryapp/Models/user_profile.dart';
+import 'package:fooddeliveryapp/UserProfile/user_profile.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
