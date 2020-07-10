@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ProductDetails extends StatefulWidget {
-  final pdName;
-  final pdPrice;
-  final pdDescription;
-  final pdImage;
+  final name;
+  final price;
+  final description;
+  final image;
+  final category;
 
-  ProductDetails({this.pdName, this.pdPrice, this.pdDescription, this.pdImage});
+  ProductDetails(
+      {this.name, this.price, this.description, this.image, this.category});
 
   _ProductDetailsState createState() => _ProductDetailsState();
 }
@@ -26,25 +28,40 @@ class _ProductDetailsState extends State<ProductDetails> {
           children: <Widget>[
             Container(
               height: 300,
-              child: Image.network(widget.pdImage),
+              child: Image.network(widget.image),
             ),
             Container(
                 child: GridTile(
               child: Container(
                   color: Colors.white,
                   child: ListTile(
-                      leading: Text(widget.pdName),
+                      leading: Text(widget.name),
                       title: Align(
                           alignment: Alignment.topRight,
                           child: Text(
-                            "${widget.pdPrice}VND",
+                            "${widget.price}VND",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.deepOrangeAccent,
                                 fontSize: 20),
                           )))),
             )),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: <Widget>[
+                    Text('Category',
+                        style: TextStyle(
+                          color: Colors.deepOrangeAccent,
+                          fontWeight: FontWeight.w500,
+                        )),
+                    SizedBox(width: 50),
+                    Text(widget.category,
+                        style: TextStyle(fontWeight: FontWeight.w800))
+                  ],
+                )),
             Row(children: <Widget>[
+              SizedBox(width: 10),
               Expanded(
                   child: MaterialButton(
                 onPressed: () {},
@@ -52,12 +69,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                 textColor: Colors.white,
                 child: Text("Buy now"),
               )),
-              IconButton(
-                icon: Icon(
-                  Icons.favorite_border,
-                  color: Colors.deepOrangeAccent,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.favorite_border,
+                    color: Colors.deepOrangeAccent,
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
               )
             ]),
             Divider(),
@@ -67,7 +87,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
               ),
               subtitle: Text(
-                "${widget.pdDescription}",
+                "${widget.description}",
                 style: TextStyle(fontSize: 14.0),
               ),
             )

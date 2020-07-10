@@ -13,15 +13,19 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     final products = Provider.of<List<Product>>(context) ?? [];
 
-    return GridView.builder(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        return ProductCard(product: products[index]);
-      },
-    );
+    if (products.length > 0) {
+      return GridView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          return ProductCard(product: products[index]);
+        },
+      );
+    } else {
+      return Text("No products available");
+    }
   }
 }

@@ -16,10 +16,11 @@ class ProductCard extends StatelessWidget {
                 child: InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ProductDetails(
-                              pdName: product.name,
-                              pdPrice: product.price,
-                              pdDescription: product.description,
-                              pdImage: product.imageUrl,
+                              name: product.name,
+                              price: product.price,
+                              description: product.description,
+                              image: product.imageUrl,
+                              category: product.category,
                             ))),
                     child: GridTile(
                       footer: Container(
