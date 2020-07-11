@@ -12,7 +12,6 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<List<Product>>(context) ?? [];
-
     if (products.length > 0) {
       return GridView.builder(
         scrollDirection: Axis.horizontal,
@@ -25,7 +24,10 @@ class _ProductListState extends State<ProductList> {
         },
       );
     } else {
-      return Text("No products available");
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text("No products available"),
+      );
     }
   }
 }

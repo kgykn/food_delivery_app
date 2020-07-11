@@ -44,7 +44,7 @@ class ProductDatabaseService {
         .toList());
   }
 
-  Stream<List<Product>> loadProductByCategory(String category) {
+  Stream<List<Product>> getProductByCategory(String category) {
     Stream<QuerySnapshot> stream = Firestore.instance
         .collection("products")
         .where("category", isEqualTo: category)

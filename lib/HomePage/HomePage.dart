@@ -5,7 +5,6 @@ import 'package:fooddeliveryapp/Authenticate/auth.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
 import 'package:fooddeliveryapp/Components/Products/ProductList.dart';
 import 'package:fooddeliveryapp/Models/product.dart';
-import 'package:fooddeliveryapp/UI/loading.dart';
 import 'package:fooddeliveryapp/UserProfile/UserProfile.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepOrangeAccent,
         actions: <Widget>[
           FlatButton.icon(
-              onPressed: null,
+              onPressed: () {},
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 Icons.shopping_basket,
                 color: Colors.white,
               ),
-              onPressed: null), // cart button
+              onPressed: () {}), // cart button
           IconButton(
               icon: Icon(
                 Icons.person,
@@ -53,14 +52,70 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-              height: 400.0,
-              child: StreamProvider<List<Product>>.value(
-                  initialData: List(),
-                  value: ProductDatabaseService().products,
-                  child: ProductList()))
+          viewCategorySelection(),
+          viewProductByCategory(selectedCategory),
         ],
       ),
     );
+  }
+
+  Widget viewCategorySelection() {
+    return Container(
+        height: 60.0,
+        child: StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection("categories").snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData)
+                const Text("Loading.....");
+              else {
+                List<DropdownMenuItem> categoryDropdownMenuItems = [];
+                categoryDropdownMenuItems.add(DropdownMenuItem(
+                  child: Text("Featured"),
+                  value: "Featured",
+                ));
+                for (int i = 0; i < snapshot.data.documents.length; i++) {
+                  DocumentSnapshot snap = snapshot.data.documents[i];
+                  categoryDropdownMenuItems.add(DropdownMenuItem(
+                    child: Text(
+                      snap.data['name'],
+                    ),
+                    value: "${snap.data['name']}",
+                  ));
+                }
+                return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      DropdownButton(
+                        items: categoryDropdownMenuItems,
+                        onChanged: (item) {
+                          setState(() {
+                            selectedCategory = item;
+                          });
+                        },
+                        value: selectedCategory,
+                        isExpanded: false,
+                        hint: Text("Choose Category"),
+                      )
+                    ]);
+              }
+            }));
+  }
+
+  Widget viewProductByCategory(String selectedCategory) {
+    if (selectedCategory == 'Featured')
+      return Container(
+          height: 400,
+          child: StreamProvider<List<Product>>.value(
+              initialData: List(),
+              value: productData.featuredProducts,
+              child: ProductList()));
+    else
+      return Container(
+          height: 400,
+          child: StreamProvider<List<Product>>.value(
+            initialData: List(),
+            value: productData.getProductByCategory(selectedCategory),
+            child: ProductList(),
+          ));
   }
 }
