@@ -19,8 +19,9 @@ class ProductCard extends StatelessWidget {
                               name: product.name,
                               price: product.price,
                               description: product.description,
-                              image: product.imageUrl,
+                              imageUrl: product.imageUrl,
                               category: product.category,
+                              quantity: 1,
                             ))),
                     child: GridTile(
                       footer: Container(

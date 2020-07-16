@@ -35,7 +35,6 @@ class _AddCategoryState extends State<AddCategory> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: nameController,
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(hintText: "Category name"),
                       validator: (value) => value.isEmpty
                           ? 'Category name can\'t be empty!'
@@ -62,8 +61,7 @@ class _AddCategoryState extends State<AddCategory> {
                             fontWeight: FontWeight.bold,
                             color: Colors.deepOrangeAccent)),
                   ),
-                  Container(
-                      height: 500.0,
+                  Expanded(
                       child: StreamProvider<List<Category>>.value(
                           initialData: List(),
                           value: CategoryDatabaseService().categoriesDescending,

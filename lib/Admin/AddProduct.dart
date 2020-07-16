@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:fooddeliveryapp/Database/categoryDatabase.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
-import 'package:fooddeliveryapp/Models/category.dart';
 import 'package:fooddeliveryapp/UI/loading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:provider/provider.dart';
 
 class AddProduct extends StatefulWidget {
   @override

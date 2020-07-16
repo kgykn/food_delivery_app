@@ -41,22 +41,27 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(height: 20.0),
-                        TextFormField(
-                            controller: emailController,
-                            decoration: InputDecoration(hintText: "Email"),
-                            validator: (value) => EmailValidator.validate(value)
-                                ? null
-                                : "Invalid email address"),
-                        SizedBox(height: 10.0),
-                        TextFormField(
-                          controller: passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(hintText: "Password"),
-                          validator: (value) => value.length < 6
-                              ? 'Password must be 6+ characters long'
-                              : null,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                              controller: emailController,
+                              decoration: InputDecoration(hintText: "Email"),
+                              validator: (value) =>
+                                  EmailValidator.validate(value)
+                                      ? null
+                                      : "Invalid email address"),
                         ),
-                        SizedBox(height: 20.0),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(hintText: "Password"),
+                            validator: (value) => value.length < 6
+                                ? 'Password must be 6+ characters long'
+                                : null,
+                          ),
+                        ),
                         RaisedButton(
                           color: Colors.deepOrangeAccent,
                           child: Text("Log In",
@@ -77,7 +82,6 @@ class _SignInState extends State<SignIn> {
                             }
                           },
                         ),
-                        SizedBox(height: 15.0),
                         Text(
                           error,
                           style: TextStyle(
