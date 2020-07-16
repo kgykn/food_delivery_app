@@ -5,6 +5,7 @@ import 'package:fooddeliveryapp/Authenticate/auth.dart';
 import 'package:fooddeliveryapp/Database/productDatabase.dart';
 import 'package:fooddeliveryapp/Components/Products/ProductList.dart';
 import 'package:fooddeliveryapp/Models/product.dart';
+import 'package:fooddeliveryapp/ShoppingCart/ShoppingCart.dart';
 import 'package:fooddeliveryapp/UserProfile/UserProfile.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,8 @@ class _HomePageState extends State<HomePage> {
                 Icons.shopping_basket,
                 color: Colors.white,
               ),
-              onPressed: () {}), // cart button
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ShoppingCart()))), // cart button
           IconButton(
               icon: Icon(
                 Icons.person,
