@@ -25,4 +25,9 @@ class CartModel extends Model {
     cart.removeWhere((i) => i.name == item.name);
     notifyListeners();
   }
+
+  void clearCart() {
+    cart.forEach((item) => cart.remove(item));
+    notifyListeners();
+  }
 }

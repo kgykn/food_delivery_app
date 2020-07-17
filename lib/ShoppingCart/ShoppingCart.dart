@@ -53,43 +53,30 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             " = " +
                             (model.cart[index].qty * model.cart[index].price)
                                 .toString()),
-                        trailing: IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: () {},
-                        ),
                       );
                     });
                   },
                 )),
-        bottomNavigationBar: ScopedModel.of<CartModel>(context,
-                        rebuildOnChange: true)
-                    .cart
-                    .length !=
-                0
-            ? Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(children: <Widget>[
-                  Container(
-                    width: 190,
-                    child: Text(
-                      "Total: " +
-                          ScopedModel.of<CartModel>(context,
-                                  rebuildOnChange: true)
-                              .totalCartValue
-                              .toString() +
-                          "VND",
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Expanded(
-                      child: MaterialButton(
-                    onPressed: () => Navigator.pop(context),
-                    color: Colors.deepOrangeAccent,
-                    child:
-                        Text('Buy now', style: TextStyle(color: Colors.white)),
-                  ))
-                ]))
-            : Container());
+        bottomNavigationBar: Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: <Widget>[
+              Container(
+                width: 220,
+                child: Text(
+                  "Total: " +
+                      ScopedModel.of<CartModel>(context, rebuildOnChange: true)
+                          .totalCartValue
+                          .toString() +
+                      "VND",
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Expanded(
+                  child: MaterialButton(
+                onPressed: () => Navigator.pop(context),
+                color: Colors.deepOrangeAccent,
+                child: Text('Buy now', style: TextStyle(color: Colors.white)),
+              ))
+            ])));
   }
 }
