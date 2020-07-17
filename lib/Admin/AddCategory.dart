@@ -30,43 +30,48 @@ class _AddCategoryState extends State<AddCategory> {
                 )),
             body: Form(
                 key: _formKey,
-                child: ListView(children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: nameController,
-                      decoration: InputDecoration(hintText: "Category name"),
-                      validator: (value) => value.isEmpty
-                          ? 'Category name can\'t be empty!'
-                          : null,
+                child: Container(
+                  height: 600.0,
+                  child: ListView(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: nameController,
+                        decoration: InputDecoration(hintText: "Category name"),
+                        validator: (value) => value.isEmpty
+                            ? 'Category name can\'t be empty!'
+                            : null,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FlatButton(
-                        color: Colors.deepOrangeAccent,
-                        child: Text(
-                          'Add category',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          formValidateAndUpload();
-                        }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('All categories',
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrangeAccent)),
-                  ),
-                  Expanded(
-                      child: StreamProvider<List<Category>>.value(
-                          initialData: List(),
-                          value: CategoryDatabaseService().categoriesDescending,
-                          child: CategoryList())),
-                ])))
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FlatButton(
+                          color: Colors.deepOrangeAccent,
+                          child: Text(
+                            'Add category',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            formValidateAndUpload();
+                          }),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('All categories',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.deepOrangeAccent)),
+                    ),
+                    Container(
+                        height: 500.0,
+                        child: StreamProvider<List<Category>>.value(
+                            initialData: List(),
+                            value:
+                                CategoryDatabaseService().categoriesDescending,
+                            child: CategoryList())),
+                  ]),
+                )))
         : Loading();
   }
 
