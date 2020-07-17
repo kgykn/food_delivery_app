@@ -3,32 +3,26 @@ import 'package:scoped_model/scoped_model.dart';
 
 class CartModel extends Model {
   List<CartItem> cart = [];
-  num totalValue = 0;
 
   int get total => cart.length;
+  int get totalCartValue {
+    int total = 0;
+    for (int i = 0; i < cart.length; i++) total += cart[i].price * cart[i].qty;
+    return total;
+  }
 
   void addItem(item, qty) {
-    int index = cart.indexWhere((i) => i.product.name == item.product.name);
+    int index = cart.indexWhere((i) => i.name == item.name);
     if (index != -1) {
       cart[index].qty = qty;
     } else {
       cart.add(item);
-      calculateTotal();
-      print(totalValue);
-      notifyListeners();
     }
-  }
-
-  void removeItem(CartItem item) {
-    cart.removeWhere((i) => i.product.name == item.product.name);
-    calculateTotal();
     notifyListeners();
   }
 
-  void calculateTotal() {
-    totalValue = 0;
-    for (int i = 0; i < cart.length; i++) {
-      totalValue += num.tryParse(cart[i].product.price) * cart[i].qty;
-    }
+  void removeItem(CartItem item) {
+    cart.removeWhere((i) => i.name == item.name);
+    notifyListeners();
   }
 }

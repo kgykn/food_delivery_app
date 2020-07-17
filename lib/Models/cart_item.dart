@@ -1,8 +1,10 @@
 import 'package:fooddeliveryapp/Models/product.dart';
 
 class CartItem {
-  final Product product;
+  final String name;
+  final int price;
+  final String imageUrl;
   int qty;
 
-  CartItem({this.product, this.qty});
+  CartItem({this.name, this.price, this.imageUrl, this.qty});
 }

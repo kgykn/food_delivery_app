@@ -87,10 +87,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                               onPressed: () {
                                 model.addItem(
                                     CartItem(
-                                        product: Product(
-                                            name: widget.name,
-                                            price: widget.price,
-                                            imageUrl: widget.imageUrl)),
+                                        name: widget.name,
+                                        price: int.tryParse(widget.price),
+                                        imageUrl: widget.imageUrl),
                                     widget.quantity);
                               },
                               color: Colors.deepOrangeAccent,
@@ -101,13 +100,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                         builder: (context, child, model) => Expanded(
                                 child: MaterialButton(
                               onPressed: () {
-                                model.addItem(
-                                    CartItem(
-                                        product: Product(
-                                            name: widget.name,
-                                            price: widget.price,
-                                            imageUrl: widget.imageUrl)),
-                                    widget.quantity);
+                                model.removeItem(CartItem(
+                                    name: widget.name,
+                                    price: int.tryParse(widget.price),
+                                    imageUrl: widget.imageUrl));
                               },
                               color: Colors.red,
                               textColor: Colors.white,
